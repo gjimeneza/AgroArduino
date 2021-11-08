@@ -32,7 +32,7 @@
 
 unsigned long timeNow = 0;
 
-// SensorHumedad define tanto el valor de una medición de humedad entre 0 y 1024
+// SensorHumedad define tanto el valor de una medición de humedad entre 0 y 1023
 // como el porcentaje real que representa
 struct SensorHumedad
 {
@@ -40,7 +40,7 @@ struct SensorHumedad
   int porcentaje = 0;
 } humedad;
 
-// SensorHumedad define tanto el valor de una medición de luz entre 0 y 1024
+// SensorLuz define tanto el valor de una medición de luz entre 0 y 1023
 // como el porcentaje real que representa
 struct SensorLuz
 {
@@ -49,7 +49,7 @@ struct SensorLuz
 } luz;
 
 // Dirección LCD en 0x27 para una pantalla de 16 caracteres y 2 líneas
-LiquidCrystal_I2C lcd(0x27, 20, 4);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // LCDRefresh se encarga de refrescar la pantalla con los valores medidos en
 // cada periodo
@@ -60,8 +60,7 @@ void LCDRefresh()
     timeNow = millis();
 
     char msg[21];
-    int temperature = 8;
-
+    
     lcd.setCursor(0, 0);
     sprintf(msg, "Humedad: %-3d%%", humedad.porcentaje);
     lcd.print(msg);
